@@ -1,0 +1,363 @@
+\documentclass[landscape]{baposter}
+
+\usepackage[vlined]{algorithm2e}
+\usepackage{times}
+\usepackage{calc}
+\usepackage{url}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{relsize}
+\usepackage{multirow}
+\usepackage{booktabs}
+
+\usepackage{multicol}
+\usepackage[T1]{fontenc}
+\usepackage{ae}
+
+\usepackage{colortbl}
+%\usepackage[upright]{fourier}
+%\usepackage{tkz-berge}
+%\usepackage{tkz-graph}
+
+% Define highlight box
+\newcommand{\highlightbox}[1]{%
+\begin{center}
+\fcolorbox{red}{cyan!10!white}{%
+\begin{minipage}{0.95\textwidth}
+\centering
+\bf #1%
+\end{minipage}}
+\end{center}}
+
+\graphicspath{{images/}}
+
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ % Format 
+ \newcommand{\RotUP}[1]{\begin{sideways}#1\end{sideways}}
+ \newcommand{\cyl}{\cellcolor[gray]{0.8}}
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ % Multicol Settings
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ \setlength{\columnsep}{0.7em}
+ \setlength{\columnseprule}{0mm}
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ % Save space in lists. Use this after the opening of the list
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ \newcommand{\compresslist}{%
+ \setlength{\itemsep}{1pt}%
+ \setlength{\parskip}{0pt}%
+ \setlength{\parsep}{0pt}%
+ }
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ % Formating
+ \newcommand{\Matrix}[1]{\begin{bmatrix} #1 \end{bmatrix}}
+ \newcommand{\Vector}[1]{\begin{pmatrix} #1 \end{pmatrix}}
+
+ \newcommand*{\norm}[1]{\mathopen\| #1 \mathclose\|}% use instead of $\|x\|$
+ \newcommand*{\abs}[1]{\mathopen| #1 \mathclose|}% use instead of $\|x\|$
+ \newcommand*{\normLR}[1]{\left\| #1 \right\|}% use instead of $\|x\|$
+
+ \newcommand*{\SET}[1]  {\ensuremath{\mathcal{#1}}}
+ \newcommand*{\FUN}[1]  {\ensuremath{\mathcal{#1}}}
+ \newcommand*{\MAT}[1]  {\ensuremath{\boldsymbol{#1}}}
+ \newcommand*{\VEC}[1]  {\ensuremath{\boldsymbol{#1}}}
+ \newcommand*{\CONST}[1]{\ensuremath{\mathit{#1}}}
+
+ \DeclareMathOperator*{\argmax}{arg\,max}
+ \DeclareMathOperator*{\diag}{diag}
+ \DeclareMathOperator*{\argmin}{arg\,min}
+ \DeclareMathOperator*{\vectorize}{vec}
+ \DeclareMathOperator*{\reshape}{reshape}
+  \DeclareMathOperator{\E}{E}
+   \DeclareMathOperator{\Corr}{Corr}
+   \DeclareMathOperator{\J}{J}
+
+\newtheorem{definition}{Definition}
+\newtheorem{thm}{Theorem}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Begin of Document
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Here starts the poster
+%%---------------------------------------------------------------------------
+%% Format it to your taste with the options
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{poster}{
+ % Show grid to help with alignment
+ grid=no,
+ % Column spacing
+ colspacing=0.7em,
+ % Color style
+ headerColorOne=cyan!20!white!90!black,
+ borderColor=cyan!30!white!90!black,
+ % Format of textbox
+ textborder=faded,
+ % Format of text header
+ eyecatcher=no,
+ headerborder=open,
+ headershape=roundedright,
+ background=none,
+ headerfont=\Large\textsf, %Sans Serif
+ bgColorOne=cyan!10!white,
+ linewidth=2pt,
+ headerheight=0.1\textheight}
+ % Eye Catcher
+ {
+
+ }
+ % Title
+ {\sf Suboptimal Provision of Privacy and Statistical Accuracy \newline When They are Public Goods}
+ % Authors
+ {
+ %\sf John M.\ Abowd, Ian M.\ Schmutte, William Sexton, Lars Vilhuber
+ \sf J. M.\ Abowd, I. M.\ Schmutte, W. Sexton, L. Vilhuber
+ %\newline 
+ \hspace{3em}
+ {Correspondence: \texttt{william.n.sexton@census.gov}}
+ }
+ % University logo
+ {
+  \begin{tabular}{rrr}
+    \includegraphics[height=0.04\textheight]{census} &
+    \includegraphics[height=0.04\textheight]{thick4c} &
+    \includegraphics[height=0.04\textheight]{CULogo4c}
+  \end{tabular}
+ }
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Now define the boxes that make up the poster
+%%%---------------------------------------------------------------------------
+%%% Each box has a name and can be placed absolutely or relatively.
+%%% The only inconvenience is that you can only specify a relative position 
+%%% towards an already declared box. So if you have a box attached to the 
+%%% bottom, one to the top and a third one which should be inbetween, you 
+%%% have to specify the top and bottom boxes before you specify the middle 
+%%% box.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \headerbox{I.\ Goal and Contribution}{name=contribution,column=0,row=0,span=1.1}{
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\highlightbox{Goal: To explain why population statistics are provided by public statistical agencies rather than private firms}
+
+To do so, we focus on inefficiencies in how private providers trade off data privacy and accuracy.
+
+	\begin{itemize}
+		\item Increasing the accuracy of published statistical summaries necessarily results in a loss of privacy for the data owners.
+		\item Data publication is based on differential privacy.
+		\item Privacy protection and accuracy are public goods.
+	\end{itemize}
+% Start highlight box
+\highlightbox{%
+We find that private provision results in suboptimally low data accuracy.
+}
+
+% end highlight box
+		\begin{itemize}
+			\item The external benefit of data accuracy to all consumers is not captured by the willingness-to-pay of the consumer with the greatest private value.
+			\item The provider buys just enough data-use rights (privacy loss) to sell the data accuracy to the consumer with the highest valuation.
+		\end{itemize}
+	
+  
+  }
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \headerbox{II.\ Modeling Privacy and Accuracy}{name=endmob,column=0,span=1.1,below=contribution}{
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\textbf{Data privacy} and \textbf{data accuracy} are quantified as follows: %Differentially private data publications do not allow an outsider to learn ``too much'' about any individual data record based on statistical summaries of the full database. 
+
+\underline{\large \bf $\varepsilon$-differential privacy:}
+\begin{definition} Query release mechanism $M$ satisfies $\varepsilon$%
+-differential privacy if for $\varepsilon > 0$, for all pairs of neighboring databases $D,D^{\prime }$, all queries $Q\in\mathcal{Q}$, and all $B\in \mathcal{B}$
+\begin{equation*}
+\Pr \left[ M(D,Q)\in B |D,Q\right] \leq e^{\varepsilon }\Pr \left[
+M(D^{\prime },Q)\in B |D^{\prime},Q\right],
+\end{equation*}%
+where $\mathcal{B}$ are the measurable subsets of $\mathbb{R}$, 
+and the randomness in $M$ is due exclusively to the mechanism.
+%and not the process generating the database $D$.
+\end{definition}
+%\textbf{Data accuracy} is quantified as follows:
+
+\underline{\large \bf $(\alpha ,\protect\beta )$-accuracy:}
+\begin{definition}
+ Query release mechanism $M$ satisfies $(\alpha ,\beta )$%
+-accuracy if for $Q\in\mathcal{Q}$ and $a$ output from $M(D,Q)$,
+$$\mbox{Pr}\Big( \, |a-Q(D)| \le \alpha \; \Big| \; D,Q\Big) \; \ge \; 1-\beta $$
+where $a, Q(D) \in \mathbb{R}$.
+\end{definition}
+
+
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  \headerbox{Our Approach}{name=disclaimer,column=0,above=bottom}{
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%}
+
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+   \headerbox{V.Competitive Market Equilibrium}{name=method,column=2.1,span=1.9,row=0, }{
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ 
+A private profit-maximizing, price-taking, firm sells $\hat{s}$ with data accuracy $I$ at price $p_{I}$. Then, profits $P\left( I\right) $ are%
+\begin{equation*}
+    P\left( I\right) =p_{I}I-C^{VCG}(I).
+\end{equation*}%
+If it sells at all, it will produce $I$ to satisfy the first-order condition
+$P^{\prime }\left( I^{VCG}\right) =0$ implying%
+\begin{equation}
+    p_{I}=Q\left( \frac{H(I)}{N}\right) H(I)\varepsilon ^{\prime }(I)+\left[
+    Q\left( \frac{H(I)}{N}\right) +Q^{\prime }\left( \frac{H(I)}{N}\right)
+    \left( \frac{H(I)}{N}\right) \right] H^{\prime }(I)\varepsilon (I)
+    \label{eq:p_private}
+\end{equation}%
+where the solution is evaluated at $I^{VCG}$. %The price of data accuracy is
+%equal to the marginal cost of increasing the amount of privacy
+%protection--data-use rights--that must be purchased. There are two terms.
+%The first term is the increment to marginal cost from increasing the amount
+%each privacy-right seller must be paid because $\varepsilon $ has been
+%marginally increased, thus reducing privacy protection for all. The second
+%term is the increment to marginal cost from increasing the number of people
+%from whom data-use rights with privacy protection $\varepsilon $ must be
+%purchased.
+As long as the cost function is strictly increasing and convex,
+the existence and uniqueness of a solution is guaranteed. 
+
+At market price $p_{I}$, consumer $i$'s willingness to pay for data accuracy will be given by solving%
+\begin{equation*}
+    \max_{I_{i}\geq 0}\eta _{i}\left( I^{\symbol{126}i}+I_{i}\right) -p_{I}I_{i}.
+\end{equation*} 
+
+%If there exists at least one consumer for whom $\eta _{i}\geq p_{I}$, then the solution to
+%equation (\ref{eq:p_private}) is attained for $I^{VCG}>0.$
+
+Consumers are playing a classic free-rider game.  
+\begin{enumerate}
+    \item the only person willing to pay for the public good is one with the maximum value of $%
+\eta _{i}$.
+    \item all others will purchase zero data accuracy but still consume the data accuracy purchased by this lone consumer. 
+\end{enumerate}
+Hence, equilibrium price and data accuracy will satisfy%
+\begin{equation*}
+    p_{I}=\bar{\eta}=\frac{dC^{VCG}\left( I^{VCG}\right) }{dI}, \text{ where } \bar{\eta} = \max \eta_i. 
+\end{equation*}%
+%where $\bar{\eta}$ is the maximum value of $\eta _{i}$ in the
+%population--the taste for accuracy of the person who desires it the most.
+However, the Pareto optimal consumption of data accuracy, $I^{0},$ solves
+\begin{equation}
+    \sum_{i=1}^{N}\eta _{i}=\frac{dC^{VCG}\left( I^{0}\right) }{dI}.
+    \label{eqn:pareto_optimality}
+\end{equation}%
+Marginal cost is positive, $\frac{dC^{VCG}\left( I^{0}\right) }{dI}>0$, and $%
+\sum_{i=1}^{N}\eta _{i} > \bar{\eta}$; therefore, data accuracy will be
+under-provided by a competitive supplier when data accuracy is a public good
+as long as marginal cost is increasing. More
+succinctly, $I^{VCG} < I^{0}$. Therefore, privacy protection must be
+over-provided, $\varepsilon ^{VCG} < \varepsilon ^{0}$.
+
+
+
+
+
+ 
+   }
+   
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+   % \headerbox{Future Work}{name=else,column=2,span=1,above=bottom}{
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+   % Something else.}
+   
+
+
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+   \headerbox{VI.\ Suboptimality Theorem}{name=correction,column=2.1,below=method,above=bottom,span=1.9}{
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{thm}
+\label{theorem:suboptimality}If preferences are as in III, the query response mechanism and cost function for the VCG mechanism are as displayed in IV, 
+the population distribution of $\gamma $ is given by $F_{\gamma }$ (bounded,
+absolutely continuous, everywhere differentiable, and with quantile function
+$Q$ satisfying the conditions such that \ref{eq:p_private} has a solution,
+the population distribution of $\eta$ has bounded support on $\left[ 0,\bar{%
+\eta}\right] $, and the population in the database is represented as a
+continuum with measure function $H$ (absolutely continuous, everywhere
+differentiable, and with total measure $N$) then $I^{VCG} < I^{0}$, where $%
+I^{0}$ is the Pareto optimal level of $I$ solving equation $\left( \ref%
+{eqn:pareto_optimality}\right) $,
+and $I^{VCG}$ is the privately-provided level when using the VCG\
+procurement mechanism.
+\end{thm}
+}
+
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+   \headerbox{III.\ Model (Consumer)}{name=rmn,column=1.1,row=0}{
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ There are $N$ private individuals:
+ \begin{itemize}
+ \item each possesses a single bit of information, $b_{i}$, and is endowed with
+income, $y_{i}$.
+     \item each consume one unit of the published statistic, which has
+accuracy $I=(1-\alpha )$. Each is charged at the market price $p_{I}$, for her \textquotedblleft
+share\textquotedblright\ of $I$, denoted $I_{i}$.
+
+     \item preferences are given by the indirect utility function
+\begin{align*}
+v_{i}\left( y_{i},\varepsilon _{i},I_{i},I^{\symbol{126}i}\right) =&\ln
+y_{i}+p_{\varepsilon }\varepsilon _{i}-\gamma _{i}\varepsilon _{i} \\ &+\eta
+_{i}\left( I_{i}+I^{\symbol{126}i}\right) -p_{I}I_{i}.  \label{eqn:linear2}
+\end{align*}%
+%Equation~(\ref{eqn:linear2}) implies that preferences are quasilinear in
+%data accuracy, $I$, privacy loss, $\varepsilon _{i}$, and log income, $\ln
+%y_{i}$.
+\end{itemize}
+The term $%
+p_{\varepsilon }$ is the common price per unit of privacy. And, $\left( \eta_{i},\gamma _{i}\right) >0,$ are the individual's marginal
+preferences for data accuracy and privacy loss and are not known to the
+data provider, but their population distributions are public information.
+ %Prices are determined by the model.
+   }
+%The evolution of the realized mobility network is a function of observable and latent node and edge characteristics.
+
+
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+   % \headerbox{Future Work}{name=future,column=2,span=2,above=bottom}{
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+   
+   % These methods must be scaled up for application to a large matched employer-employee database.
+% \begin{itemize}
+	% \item   600 billion wage records. 
+	% \item 200 million workers. 
+	% \item 10 million employers. 
+% \end{itemize}
+  
+   % }
+
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \headerbox{IV.\ Model (Producer)}{name=model,column=1.1,span=1,below=rmn}{
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ 
+Ghosh and Roth (2015) prove that publishing
+\begin{equation*}
+\hat{s}=\frac{1}{N}\left[ \sum_{i=1}^{H}b_{i}+\frac{\alpha N}{2\left(1/2+\ln \frac{1}{\beta} \right)} +%
+Lap\left( \frac{1}{\varepsilon }\right) \right] \label{eqn:GRquery}
+\end{equation*}%
+gives an $\left( \alpha ,\beta\right) $-accuracy estimate of the population mean, $\bar{b}$,
+requiring privacy loss $%
+\varepsilon_{i}=\varepsilon (I)=\frac{1/2+\ln{\left(1/\beta\right)}}{(1-I)N}$ from $H(I)=N-\frac{(1-I)N}{1/2+\ln{\left(1/\beta\right)}}$ members of the population.
+\begin{itemize}
+\item Purchasing data-use rights from those with the
+smallest $\gamma _{i}$, is a minimum-cost, envy-free VCG mechanism.
+\end{itemize}
+Under said VCG mechanism, the total cost of producing $I$ is
+\begin{equation*}
+    C^{VCG}(I)=p_\varepsilon H(I)\varepsilon (I)=Q\left( \frac{H(I)}{N}\right) H(I)\varepsilon (I)
+\end{equation*} where $Q$ is the quantile function with
+respect to the population distribution of privacy preferences, $F_{\gamma }$.
+}
+\end{poster}%
+%
+\end{document}
